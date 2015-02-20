@@ -5,7 +5,8 @@
 
 data <- readRDS("summarySCC_PM25.rds")
 data.balt <- data[data$fips=="24510",]
-yearlyEmissions.baltimore <- aggregate(data.balt$Emissions, list(data.balt$year), sum)
+yearlyEmissions.baltimore <- aggregate(data.balt$Emissions, 
+                                       list(data.balt$year), sum)
 names(yearlyEmissions.baltimore) <- c("Year", "Emissions")
 plot(yearlyEmissions.baltimore,     
      ylab="Emissions (tons)",

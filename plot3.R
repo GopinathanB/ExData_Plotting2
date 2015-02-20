@@ -12,7 +12,7 @@ yearlyEmissions.baltimore.type <- aggregate(data.balt$Emissions,
                                             sum)
 names(yearlyEmissions.baltimore.type) <- c("Year", "Type", "Emissions")
 qplot(Year, Emissions, 
-      data=yearlyEmissions.baltimore.type, facets = . ~ Type,
+      data=yearlyEmissions.baltimore.type, col = Type,
       geom=c("point", "smooth"),ylab="Emissions (tons)",
       main="Yearly emissions in Baltimore - by type, by year")
 # End of file
