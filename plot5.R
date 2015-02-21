@@ -11,10 +11,15 @@ data.balt.mv <- data[(data$SCC %in% scc.mv$SCC) &
 ye.balt.mv <- aggregate(x = data.balt.mv$Emissions, 
                         by = list(Year = data.balt.mv$year), 
                         FUN = sum)
-qplot(Year, x, 
-      data = ye.balt.mv, 
-      geom = c("point","smooth"),
-      ylab = "Emissions (tons)",
-      main = "Yearly emissions in Baltimore - Vehicle sources, by year")
+png(filename = "plot5.png",
+    width = 480,
+    height = 240)
+q <- qplot(Year, x, 
+           data = ye.balt.mv,
+           geom = c("point","smooth"),
+           ylab = "Emissions (tons)",
+           main = "Yearly emissions in Baltimore - Vehicle sources, by year")
+print(q)
+dev.off()
 
 # End of file

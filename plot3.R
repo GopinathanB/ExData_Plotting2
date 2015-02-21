@@ -11,11 +11,16 @@ ye.balt.type <- aggregate(x = data.balt$Emissions,
                           by = list(Year = data.balt$year, 
                                     Type = data.balt$type), 
                           FUN = sum)
-qplot(Year, x, 
-      col = Type,
-      data = ye.balt.type, 
-      geom = c("point", "smooth"),
-      ylab = "Emissions (tons)",
-      main = "Yearly emissions in Baltimore - by type, by year")
+png(filename = "plot3.png",
+    width = 480,
+    height = 240)
+q <- qplot(Year, x, 
+           col = Type,
+           data = ye.balt.type, 
+           geom = c("point", "smooth"),
+           ylab = "Emissions (tons)",
+           main = "Yearly emissions in Baltimore - by type, by year")
+print(q)
+dev.off()
 
 # End of file

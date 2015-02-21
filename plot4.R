@@ -10,10 +10,15 @@ data.cc <- data[data$SCC %in% scc.cc$SCC, ]
 ye.cc <- aggregate(x = data$Emissions, 
                    by = list(Year = data$year), 
                    FUN = sum)
-qplot(Year, x, 
-      data = ye.cc, 
-      geom = c("point","smooth"),
-      ylab = "Emissions (tons)",
-      main = "Yearly emissions - Coal combustion sources, by year")
+png(filename = "plot4.png",
+    width = 480,
+    height = 240)
+q <- qplot(Year, x, 
+           data = ye.cc,
+           geom = c("point","smooth"),
+           ylab = "Emissions (tons)",
+           main = "Yearly emissions - Coal combustion sources, by year")
+print(q)
+dev.off()
 
 # End of file.

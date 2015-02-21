@@ -7,11 +7,15 @@ data <- readRDS("summarySCC_PM25.rds")
 ye <- aggregate(x = data$Emissions, 
                 by = list(Year = data$year), 
                 FUN = sum)
+png(filename = "plot1.png",
+    width = 480,
+    height = 240)
 plot(ye,     
      ylab = "Emissions (tons)",
      main = "Yearly emissions - all sources, by year")
 abline(lm(ye$x ~ ye$Year), 
        col = "blue", 
        lwd = 2)
+dev.off()
 
 # End of file
