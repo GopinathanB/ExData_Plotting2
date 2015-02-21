@@ -4,14 +4,15 @@
 # plot answering this question.
 
 data <- readRDS("summarySCC_PM25.rds")
-data.balt <- data[data$fips=="24510",]
-yearlyEmissions.baltimore <- aggregate(data.balt$Emissions, 
-                                       list(data.balt$year), sum)
-names(yearlyEmissions.baltimore) <- c("Year", "Emissions")
-plot(yearlyEmissions.baltimore,     
-     ylab="Emissions (tons)",
-     main="Yearly emissions in Baltimore - all sources, by year")
-abline(lm(yearlyEmissions.baltimore$Emissions ~ yearlyEmissions.baltimore$Year), 
-       col="blue", 
-       lwd=2)
+data.balt <- data[data$fips == "24510",]
+ye.balt <- aggregate(x = data.balt$Emissions, 
+                     by = list(Year = data.balt$year), 
+                     FUN = sum)
+plot(ye.balt,     
+     ylab = "Emissions (tons)",
+     main = "Yearly emissions in Baltimore - all sources, by year")
+abline(lm(ye.balt$x ~ ye.balt$Year), 
+       col = "blue", 
+       lwd = 2)
+
 # End of file

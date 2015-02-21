@@ -4,12 +4,14 @@
 # from all sources for each of the years 1999, 2002, 2005, and 2008.
 
 data <- readRDS("summarySCC_PM25.rds")
-yearlyEmissions <- aggregate(data$Emissions, list(data$year), sum)
-names(yearlyEmissions) <- c("Year", "Emissions")
-plot(yearlyEmissions,     
-     ylab="Emissions (tons)",
-     main="Yearly emissions - all sources, by year")
-abline(lm(yearlyEmissions$Emissions ~ yearlyEmissions$Year), 
-       col="blue", 
-       lwd=2)
+ye <- aggregate(x = data$Emissions, 
+                by = list(Year = data$year), 
+                FUN = sum)
+plot(ye,     
+     ylab = "Emissions (tons)",
+     main = "Yearly emissions - all sources, by year")
+abline(lm(ye$x ~ ye$Year), 
+       col = "blue", 
+       lwd = 2)
+
 # End of file

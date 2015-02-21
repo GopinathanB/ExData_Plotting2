@@ -3,16 +3,19 @@
 # nonroad) variable, which of these four sources have seen decreases in emissions 
 # from 1999–2008 for Baltimore City? Which have seen increases in emissions from 
 # 1999–2008? Use the ggplot2 plotting system to make a plot answer this question.
+
 library("ggplot2")
 data <- readRDS("summarySCC_PM25.rds")
-data.balt <- data[data$fips=="24510",]
-data.balt$type <- factor(data.balt$type)
-yearlyEmissions.baltimore.type <- aggregate(data.balt$Emissions, 
-                                            list(data.balt$year, data.balt$type), 
-                                            sum)
-names(yearlyEmissions.baltimore.type) <- c("Year", "Type", "Emissions")
-qplot(Year, Emissions, 
-      data=yearlyEmissions.baltimore.type, col = Type,
-      geom=c("point", "smooth"),ylab="Emissions (tons)",
-      main="Yearly emissions in Baltimore - by type, by year")
+data.balt <- data[data$fips == "24510",]
+ye.balt.type <- aggregate(x = data.balt$Emissions, 
+                          by = list(Year = data.balt$year, 
+                                    Type = data.balt$type), 
+                          FUN = sum)
+qplot(Year, x, 
+      col = Type,
+      data = ye.balt.type, 
+      geom = c("point", "smooth"),
+      ylab = "Emissions (tons)",
+      main = "Yearly emissions in Baltimore - by type, by year")
+
 # End of file
